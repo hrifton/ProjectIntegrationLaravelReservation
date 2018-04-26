@@ -20,6 +20,7 @@ class CreateShowsTable extends Migration
             $table->string('poster_url')->nullable();
             $table->integer('location_id')->references('id')->on('locations')->nullable();
             $table->smallInteger('bookable')->nullable();
+            $table->float('price',8,2)->nullable();
             $table->timestamps();
         });
     }

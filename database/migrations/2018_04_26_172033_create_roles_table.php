@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRepresentationTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateRepresentationTable extends Migration
      */
     public function up()
     {
-        Schema::create('representations', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('show_id')->references('id')->on('shows')->nullable();
-            $table->datetime('when')->nullable();
-            $table->integer('location_id')->references('id')->on('localities')->nullable();
+            $table->string('role');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateRepresentationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('representations');
+        Schema::dropIfExists('roles');
     }
 }
