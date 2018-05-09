@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypeTable extends Migration
+class AddDeletedAtArtites extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('type')->nullable();
-            $table->timestamps();
+        Schema::table('artistes', function (Blueprint $table) {
+            $table->datetime('deleted_at')->nullable();
         });
     }
 
@@ -27,6 +25,8 @@ class CreateTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::table('artistes', function (Blueprint $table) {
+             $table->dropColumn('deleted_at');
+        });
     }
 }

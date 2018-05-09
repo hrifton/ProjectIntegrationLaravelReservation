@@ -12,5 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('accueil');
 });
+
+//Artites
+Route::get('artistes','ArtisteController@index');
+Route::get('artistes/create','ArtisteController@create');
+Route::post('artistes','ArtisteController@store');
+Route::get('artistes/{id}/edit','ArtisteController@edit');
+Route::put('artistes/{id}','ArtisteController@update');
+Route::delete('artistes/{id}','ArtisteController@destroy');
+
+
+//
+
+
+
+
+Auth::routes();
+
