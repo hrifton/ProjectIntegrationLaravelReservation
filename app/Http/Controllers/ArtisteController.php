@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
 use App\Artiste;
+use Illuminate\Support\Facades\DB;
 
 class ArtisteController extends Controller
 {
 //lsite les artistes
 public function index(){
 
-    $listArtiste= Artiste::all();
-    return view('artiste.index',['artistes'=>$listArtiste]);
+
+    $listArtiste= DB::table('artistes')->where('deleted_at',null)->get();
+
+    return view('artiste/index')->with('artistes',$listArtiste);
 }
 
 //affiche le formulaire
@@ -23,13 +27,17 @@ return view('artiste.create');
 
 //enregistrer l'artiste
 public function store(Request $request){
+
+$parametre=$request;
+
+
 $artiste=new Artiste();
 
 $artiste->nom=$request->input('nom');
 $artiste->prenom=$request->input('prenom');
 
-$artiste->save();
-return redirect('artistes');
+
+return redirect()->route('index')->with('success', "Ajout de l'artiste ok");
 
 }
 

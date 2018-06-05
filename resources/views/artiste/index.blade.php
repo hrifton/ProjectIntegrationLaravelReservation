@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <h1>Liste des Artistes</h1>
             <div class="pull-left">
-                    <a href="{{url('artistes/create')}}">Nouvelle Artiste</a>
+                    <a href="{{route('fa')}}">Nouvelle Artiste</a>
                 </div>
             <table class="table">
                 <head>

@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{url('artistes')}}" method="post">
+            <form action="{{route('va')}}" method="post">
 
                     {{ csrf_field() }}
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDeletedAtArtites extends Migration
+class CreateArtistesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddDeletedAtArtites extends Migration
      */
     public function up()
     {
-        Schema::table('artistes', function (Blueprint $table) {
-            $table->datetime('deleted_at')->nullable();
+        Schema::create('artistes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->timestamps();
+            $table->softDeletes()->nullable();      
         });
     }
 
@@ -25,8 +29,6 @@ class AddDeletedAtArtites extends Migration
      */
     public function down()
     {
-        Schema::table('artistes', function (Blueprint $table) {
-             $table->dropColumn('deleted_at');
-        });
+        Schema::dropIfExists('artistes');
     }
 }

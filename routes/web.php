@@ -11,23 +11,41 @@
 |
 */
 
-Route::get('/', function () {
-    return view('accueil');
-});
+
 
 //Artites
-Route::get('artistes','ArtisteController@index');
-Route::get('artistes/create','ArtisteController@create');
-Route::post('artistes','ArtisteController@store');
+Route::get('/',[
+	'as'=>'index',
+	'uses'=>'ArtisteController@index']);
+
+
+//Route::get('artistes/create','ArtisteController@create');
+Route::get('artistes/create',[
+'as'=>'fa',
+'uses'=>'ArtisteController@create'
+]);
+
+
+Route::post('artistes',[
+	'as'=>'va',
+	'uses'=>'ArtisteController@store']);
 Route::get('artistes/{id}/edit','ArtisteController@edit');
+
+
 Route::put('artistes/{id}','ArtisteController@update');
 Route::delete('artistes/{id}','ArtisteController@destroy');
-
+Route::get('/test/{name}','ArtisteController@test');
 
 //
 
+//Json
+Route::get('/all.json',[
+]);
 
-
+Route::get('/listePieces',[
+    'as'=>'ListPiece',
+    'uses'=>'ListePiecesController@index'
+]);
 
 Auth::routes();
 
