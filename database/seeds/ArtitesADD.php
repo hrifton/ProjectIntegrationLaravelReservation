@@ -15,6 +15,6 @@ class ArtitesADD extends Seeder
         	'nom' => 'Lahcen',
         	'prenom' => 'hicham',
 
-        ])
+        ]);
     }
 }
