@@ -10,7 +10,7 @@ class ListePiecesController extends Controller
     public function index(){
         $ListUrl='https://api.theatredelaville-paris.com/events';
        $maps_json= file_get_contents($ListUrl);
-       $arr=json_decode($maps_json);
+       $arr=json_decode($maps_json,true);
 
 
 

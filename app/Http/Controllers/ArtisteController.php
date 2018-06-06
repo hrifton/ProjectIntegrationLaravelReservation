@@ -35,7 +35,7 @@ $artiste=new Artiste();
 
 $artiste->nom=$request->input('nom');
 $artiste->prenom=$request->input('prenom');
-
+$artiste->save();
 
 return redirect()->route('index')->with('success', "Ajout de l'artiste ok");
 
