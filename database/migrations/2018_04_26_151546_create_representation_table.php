@@ -15,9 +15,11 @@ class CreateRepresentationTable extends Migration
     {
         Schema::create('representations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('show_id')->references('id')->on('shows')->nullable();
+            $table->integer('show_id')->unsigned();
+            $table->foreign('show_id')->references('id')->on('shows')->nullable();
             $table->datetime('when')->nullable();
-            $table->integer('location_id')->references('id')->on('localities')->nullable();
+            $table->integer('location_id')->unsigned();
+            $table->foreign('location_id')->references('id')->on('locations')->nullable();
             $table->timestamps();
         });
     }

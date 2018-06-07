@@ -18,7 +18,8 @@ class CreateLocationsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('designation')->nullable();
             $table->string('adresse')->nullable();
-            $table->integer('locality_id')->references('id')->on('localities');
+            $table->integer('locality_id')->unsigned();
+            $table->foreign('locality_id')->references('id')->on('localities');
             $table->string('web');
             $table->string('phone')->nullable();
             $table->timestamps();

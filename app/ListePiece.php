@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class listePieces extends Model
+class ListePiece extends Model
 {
 
 }

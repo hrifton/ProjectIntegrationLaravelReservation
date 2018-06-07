@@ -13,10 +13,12 @@ class CreateTypeArtistes extends Migration
      */
     public function up()
     {
-        Schema::create('type_artiste', function (Blueprint $table) {
+        Schema::create('type_artistes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('artiste_id')->references('id')->on ('artistes');
-            $table->integer('type_id')->references('id')->on ('types');
+            $table->integer('artiste_id')->unsigned();
+            $table->foreign('artiste_id')->references('id')->on ('artistes');
+            $table->integer('type_id')->unsigned();;
+            $table->foreign('type_id')->references('id')->on ('types');
             $table->timestamps();
         });
     }

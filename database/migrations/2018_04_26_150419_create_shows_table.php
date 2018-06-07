@@ -18,7 +18,8 @@ class CreateShowsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('titre')->nullable();
             $table->string('poster_url')->nullable();
-            $table->integer('location_id')->references('id')->on('locations')->nullable();
+            $table->integer('location_id')->unsigned();
+            $table->foreign('location_id')->references('id')->on('locations')->nullable();
             $table->smallInteger('bookable')->nullable();
             $table->timestamps();
         });

@@ -15,8 +15,10 @@ class CreateReoresentationUser extends Migration
     {
         Schema::create('representation_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('represenation_id')->references('id')->on('representations')->nullable();
-            $table->integer('user_id')->references('id')->on('users')->nullable();
+            $table->integer('represenation_id')->unsigned();
+            $table->foreign('represenation_id')->references('id')->on('representations')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->nullable();
             $table->integer('place');
 
             $table->timestamps();

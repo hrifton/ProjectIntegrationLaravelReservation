@@ -15,8 +15,10 @@ class CreateArtisteTypeShowTable extends Migration
     {
         Schema::create('artiste_type_show', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('show_id')->references('id')->on('shows')->nullable();
-            $table->integer('artiste_type_id')->references('id')->on('type_artistes')->nullable();
+            $table->integer('show_id')->unsigned();
+            $table->foreign('show_id')->references('id')->on('shows')->nullable();
+            $table->integer('artiste_type_id')->unsigned();
+            $table->foreign('artiste_type_id')->references('id')->on('type_artistes')->nullable();
             $table->timestamps();
         });
     }

@@ -46,6 +46,15 @@ Route::get('/listePieces',[
     'as'=>'ListPiece',
     'uses'=>'ListePiecesController@index'
 ]);
+Route::get('/adresse',[
+    'as'=>'adresse',
+    'uses'=>'LocalitieController@index'
+]);
+
+Route::get('/rue',[
+    'as'=>'rue',
+    'uses'=>'LocationController@index'
+]);
 
 Auth::routes();
 
