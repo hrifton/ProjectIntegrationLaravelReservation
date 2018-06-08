@@ -17,6 +17,8 @@ class CreateShowsTable extends Migration
             $table->increments('id');
             $table->string('slug')->nullable();
             $table->string('titre')->nullable();
+            $table->integer('categorie_id')->unsigned();
+            $table->foreign('categorie_id')->references('id')->on('categorie_spectacles');
             $table->string('poster_url')->nullable();
             $table->integer('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations')->nullable();

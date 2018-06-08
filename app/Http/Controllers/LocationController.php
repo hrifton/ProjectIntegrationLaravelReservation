@@ -1,40 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Localitie;
+
 use App\Location;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
 
-class LocationController extends Controller
-{
-    public function index (){
-        $ListUrl='https://api.theatredelaville-paris.com/places';
-        $maps_json= file_get_contents($ListUrl);
-        $arr=json_decode($maps_json,true);
-        $arr=$arr["hydra:member"];
+class LocationController extends Controller {
+	public function index() {
+		$ListUrl = 'https://api.theatredelaville-paris.com/places';
+		$maps_json = file_get_contents($ListUrl);
+		$arr = json_decode($maps_json, true);
+		$arr = $arr["hydra:member"];
+		$taille_arr = count($arr);
+		$DB = Location::get();
+		$tailleLgDB = count($DB);
+		/**verification de la taille de la DB et les info de l'API
+			            si API plus grand insertion des nouvelles données**/
+		if ($taille_arr > $tailleLgDB) {
+			foreach ($arr as $key) {
 
-        //dump($arr);
+				if (Location::where('designation', $key['name'])->first() == null);
+				$l = new Location();
+				$l->designation = $key["name"];
+				$adres = $key["address"]["streetAddress"];
+				$l->adresse = ($adres);
+				$idCodePost = Localitie::where('postal_code', $key["address"]["postalCode"])->pluck("id")->first();
+				$l->slug = $l->designation . $adres;
+				$l->locality_id = $idCodePost;
+				$l->save();
 
-        foreach ($arr as $key) {
-          
-           $l = new Location();
-            //nom du lieu
-          $l->designation=$key["name"];
-          
-           //rue
-           $adres=$key["address"]["streetAddress"];
-           //dump($adres);
-           $l->adresse=($adres);
-          //codePostal
-          $idCodePost=Localitie::where('postal_code', $key["address"]["postalCode"])->pluck("id")->first();
-          $l->slug=$l->designation.$adres;
-          $l->locality_id= $idCodePost;
-           // dd($l->adresse);
-            
-           $l->save();
-       
-           
-        }
-    }
+			}
+		} else {
+			echo "rien a rajouté";
+		}
+	}
 }

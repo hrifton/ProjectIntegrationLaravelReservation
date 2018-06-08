@@ -1,35 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Localitie;
+use App\CategorieSpectacle;
 use Illuminate\Http\Request;
 
-class LocalitieController extends Controller {
+class CategorieSpectacleController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$ListUrl = 'https://api.theatredelaville-paris.com/places';
+		$ListUrl = 'https://api.theatredelaville-paris.com/taxons';
 		$maps_json = file_get_contents($ListUrl);
 		$arr = json_decode($maps_json, true);
 		$arr = collect($arr["hydra:member"]);
-		$listDB = Localitie::get();
-		if (count($arr) > count($listDB)) {
-
+		dump($arr);
+		if (count($arr) > CategorieSpectacle::count()) {
 			foreach ($arr as $key) {
-
-				if (Localitie::where('postal_code', $key["address"]["postalCode"])->first() == null) {
-					$l = new Localitie();
-					$l->postal_code = $key["address"]["postalCode"];
-					$l->locality = $key["address"]["addressLocality"];
-					$l->save();
-				}
+				if (CategorieSpectacle::where('categorie', $key["name"])->first() == null) {
+					$c = new CategorieSpectacle();
+					$c->categorie = $key["name"];
+					$c->save();}
 			}
-		} else {echo "rien a rajouté";}
+		} else {
+			echo "rien a rajouté";
+		}
+
 	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -52,20 +51,20 @@ class LocalitieController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  \App\Localitie  $localitie
+	 * @param  \App\CategorieSpectacle  $CategorieSpectacle
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Localitie $localitie) {
+	public function show(CategorieSpectacle $CategorieSpectacle) {
 		//
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  \App\Localitie  $localitie
+	 * @param  \App\CategorieSpectacle  $CategorieSpectacle
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Localitie $localitie) {
+	public function edit(CategorieSpectacle $CategorieSpectacle) {
 		//
 	}
 
@@ -73,20 +72,20 @@ class LocalitieController extends Controller {
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\Localitie  $localitie
+	 * @param  \App\CategorieSpectacle  $CategorieSpectacle
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Localitie $localitie) {
+	public function update(Request $request, CategorieSpectacle $CategorieSpectacle) {
 		//
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  \App\Localitie  $localitie
+	 * @param  \App\CategorieSpectacle  $CategorieSpectacle
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Localitie $localitie) {
+	public function destroy(CategorieSpectacle $CategorieSpectacle) {
 		//
 	}
 }

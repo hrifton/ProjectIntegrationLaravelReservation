@@ -9,52 +9,61 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
-
+ */
 
 //Artites
-Route::get('/',[
-	'as'=>'index',
-	'uses'=>'ArtisteController@index']);
-
+Route::get('/', [
+	'as' => 'index',
+	'uses' => 'ArtisteController@index']);
 
 //Route::get('artistes/create','ArtisteController@create');
-Route::get('artistes/create',[
-'as'=>'fa',
-'uses'=>'ArtisteController@create'
+Route::get('artistes/create', [
+	'as' => 'fa',
+	'uses' => 'ArtisteController@create',
 ]);
 
+Route::post('artistes', [
+	'as' => 'va',
+	'uses' => 'ArtisteController@store']);
+Route::get('artistes/{id}/edit', 'ArtisteController@edit');
 
-Route::post('artistes',[
-	'as'=>'va',
-	'uses'=>'ArtisteController@store']);
-Route::get('artistes/{id}/edit','ArtisteController@edit');
-
-
-Route::put('artistes/{id}','ArtisteController@update');
-Route::delete('artistes/{id}','ArtisteController@destroy');
-Route::get('/test/{name}','ArtisteController@test');
+Route::put('artistes/{id}', 'ArtisteController@update');
+Route::delete('artistes/{id}', 'ArtisteController@destroy');
+Route::get('/test/{name}', 'ArtisteController@test');
 
 //
 
 //Json
-Route::get('/all.json',[
+Route::get('/all.json', [
 ]);
 
-Route::get('/listePieces',[
-    'as'=>'ListPiece',
-    'uses'=>'ListePiecesController@index'
+Route::get('/listePieces', [
+	'as' => 'ListPiece',
+	'uses' => 'ListePiecesController@index',
 ]);
-Route::get('/adresse',[
-    'as'=>'adresse',
-    'uses'=>'LocalitieController@index'
+Route::get('/adresse', [
+	'as' => 'adresse',
+	'uses' => 'LocalitieController@index',
 ]);
 
-Route::get('/rue',[
-    'as'=>'rue',
-    'uses'=>'LocationController@index'
+Route::get('/rue', [
+	'as' => 'rue',
+	'uses' => 'LocationController@index',
+]);
+
+Route::get('/cat', [
+	'as' => 'cat',
+	'uses' => 'CategorieSpectacleController@index',
+]);
+
+Route::get('/show', [
+	'as' => 'show',
+	'uses' => 'ShowController@index',
+]);
+
+Route::get('/rep', [
+	'as' => 'representation',
+	'uses' => 'representationController@index',
 ]);
 
 Auth::routes();
-
