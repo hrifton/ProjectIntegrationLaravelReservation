@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
 
             <form action="{{url('artistes/'.$artiste->id)}}" method="post">
                     <input type="hidden" name="_method" value="PUT">
@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                     <label for="">Nom</label>
-                    <input type="text" name="nom" class="form-control" value="{{$artistes->nom}}">
+                    <input type="text" name="nom" class="form-control" value="{{$artiste->nom}}">
                 </div>
 
                 <div class="form-group">

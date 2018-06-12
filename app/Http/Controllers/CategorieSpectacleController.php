@@ -15,7 +15,7 @@ class CategorieSpectacleController extends Controller {
 		$maps_json = file_get_contents($ListUrl);
 		$arr = json_decode($maps_json, true);
 		$arr = collect($arr["hydra:member"]);
-		dump($arr);
+
 		if (count($arr) > CategorieSpectacle::count()) {
 			foreach ($arr as $key) {
 				if (CategorieSpectacle::where('categorie', $key["name"])->first() == null) {

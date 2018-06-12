@@ -21,15 +21,15 @@
                 </head>
                 <body>
                     @foreach ($artistes as $artiste )
-                        
-                    
+
+
                     <tr>
                         <td>{{$artiste->nom}}</td>
                         <td>{{$artiste->prenom}}</td>
                         <td>{{$artiste->created_at}}</td>
                         <td>{{$artiste->updated_at}}</td>
-                           
-                           <td> 
+
+                           <td>
                         <form action="{{url('artistes/'.$artiste->id)}}" method="post">
                         {{csrf_field() }}
                         {{method_field('DELETE')}}
@@ -38,7 +38,7 @@
 
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                        </form>
-                    
+
                         </td>
                     </tr>
                     @endforeach
