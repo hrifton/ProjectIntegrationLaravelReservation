@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Representation extends Model {
-
+/*
 	public function injectApi() {
 
 		$ListUrl = 'https://api.theatredelaville-paris.com/events';
@@ -69,5 +69,5 @@ dump('function tableau save');
 	public function getRepDB($id){
 		$rep=Representation::where('show_id',$id)->get();
 	return $rep;
-	}
+	}*/
 }

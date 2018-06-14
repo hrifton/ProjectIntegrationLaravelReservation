@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Show;
+use App\CategorieSpectacle;
 use App\Representation;
+use App\Show;
 
 class ShowController extends Controller {
 	public function index() {
@@ -19,10 +20,22 @@ class ShowController extends Controller {
 
 	public function getShow($id) {
 		$show = Show::find($id);
-		$representation= Representation::where('show_id',$show->id)->pluck('when')->all();
-		
-		
-
-		return view('shows.show')->with(["show"=>$show,"representations"=>$representation]);
+		$representation = Representation::where('show_id', $show->id)->pluck('when')->all();
+		$cat = CategorieSpectacle::where('id', $show->categorie_id)->pluck('categorie')->first();
+		return view('shows.show')->with(["show" => $show, "representations" => $representation, "cat" => $cat]);
 	}
-}
+
+	public function adminApi(){
+		$a=new Show();
+		$a=$a->connectApi();		
+		return view('admin.admin')->with('arr',$a);
+	}
+
+	public function addShow(){
+		$show=new Show();
+		$show->addShow(request());
+		return redirect ('/admin');
+	}
+
+	
+ }

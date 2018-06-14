@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+class TypeArtisteController extends Controller {
 
-class TypeArtisteController extends Controller
-{
-    //
 }

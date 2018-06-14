@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Artiste;
-use App\Type;
-use App\TypeArtiste;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ArtisteController extends Controller {
-
-	
 
 	//lsite les artistes
 	public function index() {
@@ -69,31 +65,9 @@ class ArtisteController extends Controller {
 		return redirect('artistes');
 	}
 
-	public function api() {
-
-		$ListUrl = 'https://api.theatredelaville-paris.com/people';
-		$maps_json = file_get_contents($ListUrl);
-		$arr = json_decode($maps_json, true);
-		$arr = collect($arr["hydra:member"]);
-		//dd($arr);
-		//insertion de nouveau artiste via api
-		foreach ($arr as $key) {
-
-			if (!Artiste::where('slug', $key["name"] . $key["familyName"])->first()) {
-				$t = new TypeArtiste();
-				$a = new Artiste();
-				$a->nom = $key["name"];
-				$a->prenom = $key["familyName"];
-				$a->slug = $a->nom . $a->prenom;
-				$a->save();
-				//insertion table de liaison type_artiste
-				$t->artiste_id = Artiste::where('slug', $a->slug)->pluck('id')->first();
-				$t->type_id = (Type::where('type', $key["jobTitle"])->pluck('id')->first()) ? Type::where('type', $key["jobTitle"])->pluck('id')->first() : 1;
-				$t->save();
-
-			}
-		}
+	public function SaveFromApi() {
+		$art = new Artiste();
+		$art->apiArtiste();
 
 	}
-
 }
