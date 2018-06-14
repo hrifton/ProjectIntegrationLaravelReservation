@@ -53,5 +53,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //admin
-Route::get('/admin', ['as'=>'admin','uses'=>'ShowController@adminApi']);
+Route::get('/admin', ['as'=>'admin','uses'=>'ShowController@adminApi'])->;
 Route::post('/admin',['as'=>'admin','uses'=>'ShowController@addShow']);
